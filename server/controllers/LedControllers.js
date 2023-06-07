@@ -1,20 +1,22 @@
 const cron = require('cron');
-let ledstate = false;
+let ledState = false;
 
-const toggleLed =()=>{
-    ledstate = !ledstate
-    console.log('led state: ${ledstate}')
+const toggleLED =()=>{
+    ledState = !ledState
+    console.log(`Led state: ${ledState}`);
 }
 
-const job = new cron.CronJob('*/01* * * * *',toggleLed)
+const job = new cron.CronJob('*/1 * * * * *',toggleLED)
+
 
 job.start();
 
-module.export = class LedController{
+
+module.exports = class LedController{
     static async init(req,res){
         res.send({message: 'eeee'})
     }
-    static async ledstate(req,res){
-        res.json({state: ledstate})
+    static async ledState(req,res){
+        res.json({state: ledState})
     }
 }

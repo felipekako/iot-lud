@@ -1,7 +1,7 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const LedController = require('../controllers/LedControllers');
 
 router.get('/',LedController.init)
-router.get('/state-led',LedController.ledstate)
+router.get('/state-led',LedController.ledState)
 
-module.export = router 
+module.exports = router
