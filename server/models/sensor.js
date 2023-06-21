@@ -6,6 +6,6 @@ const sensorSchema = new mongoose.Schema({
     horario: {type: Date,default: Date.now}
 })
 
-const Sensor = mongoose.model("sensor",srnsorSchema)
+const Sensor = mongoose.model("sensor",sensorSchema)
 
 module.exports = Sensor;
