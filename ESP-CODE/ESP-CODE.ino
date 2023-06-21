@@ -27,7 +27,7 @@ void setup() {
   HTTPClient http;
 
   client.setInsecure();
-  http.begin(client,"https://iot-lead.onrender.com");
+  http.begin(client,"https://iot-lead.onrender.com/");
   int httpCode = http.GET();
   if(httpCode > 0){
     String payload = http.getString();
@@ -38,6 +38,26 @@ void setup() {
 }
 
 void loop() {
+  
+  WiFiClientSecure client;
+  HTTPClient http;
+  client.setInsecure();
+  http.begin(client,"https://iot-lead.onrender.com/led/state-led");
+  int httpCode = http.GET();
+  String payload = http.getString();
+  Serial.println(payload);
+
+  StaticJsonDocument<54> doc;
+
+  DeserializationError error = deserializeJson(doc,payload);
+  if(error){
+    Serial.print(F ("deu ruim a transformar doc em  json da api "));
+    Serial.println(error.f_str());
+    }
+  bool state = doc["state"];
+  Serial.println(state);
+  digitalWrite(led,state);
+  delay(10);
   // put your main code here, to run repeatedly:
   digitalWrite(led,HIGH);
   delay(500);
